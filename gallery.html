@@ -1,0 +1,431 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Marina Fleet</title>
+
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+  <style>
+    body{
+      padding: 0px;
+      margin: 0px;
+      box-sizing: border-box;
+    }
+    :root{
+      --navy:#00aef0;
+      --deep-navy:#0a2a44;
+      --gold:#f0c400;
+      --muted:#f5f7f9;
+      --accent:#00b7c2;
+      --text:#222;
+    }
+    
+.gallery {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 15px;
+    }
+
+    .gallery-item {
+      position: relative;
+      overflow: hidden;
+      cursor: pointer;
+      border-radius: 12px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+    }
+
+    .gallery-item img {
+      width: 100%;
+      height: 220px;
+      object-fit: cover;
+      transition: transform 0.4s ease;
+    }
+
+    .gallery-item:hover img {
+      transform: scale(1.1);
+    }
+
+    .gallery-item .caption {
+      position: absolute;
+      bottom: 0;
+      width: 100%;
+      text-align: center;
+      background: rgba(0,0,0,0.6);
+      color: #fff;
+      padding: 8px;
+      font-size: 18px;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+
+    .gallery-item:hover .caption {
+      opacity: 1;
+    }
+
+
+    .popup {
+      display: none;
+      position: fixed;
+      z-index: 1000;
+      left: 0; top: 0;
+      width: 100%; height: 100%;
+      background: rgba(0,0,0,0.8);
+      justify-content: center;
+      align-items: center;
+    }
+
+    .popup img {
+      max-width: 90%;
+      max-height: 80%;
+      border-radius: 12px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.5);
+    }
+
+    .popup span {
+      position: absolute;
+      top: 20px;
+      right: 40px;
+      font-size: 40px;
+      color: #fff;
+      cursor: pointer;
+      font-weight: bold;
+    }
+
+
+
+
+    footer{padding:40px 20px;}
+
+
+    @media (max-width:1000px){
+      .hero{min-height:460px}
+      .hero .container{flex-direction:column;gap:20px}
+      .hero-left{max-width:100%;text-align:center}
+      .hero h1{font-size:40px}
+      .hero-right{max-width:80%}
+      .dest-grid{grid-template-columns:repeat(2,1fr)}
+    }
+    @media (max-width:600px){
+      .hero{min-height:520px}
+      .dest-grid{grid-template-columns:1fr}
+      .hero h1{font-size:32px}
+    }
+    @media (max-width:832px){
+      .nav-links{display: none;}
+      
+    }
+    #f-img{
+      width: 100%;
+    }
+    .navbar-nav .nav-link{
+      color: #f5f7f9;
+    }
+    #contact-form{
+      display: none;
+    }
+    .move-text-box {
+      width: 100%;
+      overflow: hidden;
+      position: relative;
+      height: 100px;
+    }
+
+    .move-text {
+      position: absolute;
+      white-space: nowrap;
+      animation: moveText 10s linear infinite;
+      font-size: 1.2rem;
+      padding: 20px;
+    }
+    @keyframes moveText {
+      0% {
+        right: -100%;
+      }
+      100% {
+        right: 100%;
+      }
+    }
+
+  </style>
+</head>
+<body>
+
+<nav class="navbar navbar-expand-lg py-3" style="background: linear-gradient(to right, #e6eef5, #244a6f);">
+  <div class="container">
+    <a class="navbar-brand" href="#">Logo</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav m-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="#">Home</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="gallery.html">Gallery</a>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+          Categories 
+          </a>
+          <ul class="dropdown-menu">
+            <li><a class="dropdown-item" href="#">Luxury</a></li>
+            <li><a class="dropdown-item" href="#">Sailing</a></li>
+            <li><hr class="dropdown-divider"></li>
+            <li><a class="dropdown-item" href="#">Fishing</a></li>
+          </ul>
+        </li>
+       <li class="nav-item">
+          <a class="nav-link" href="#">About</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">Contact</a>
+        </li>
+      </ul>
+    
+        <button class="btn text-light rounded-5" type="submit" style="background-color: #244a6f;">Contact Us</button>
+      
+    </div>
+  </div>
+</nav>
+
+
+  <form class="pt-5 container pb-5" id="contact-form">
+  <div class="d-flex justify-content-between">
+  <h2>Contact Form</h2>
+  <button type="button" id="cancel-btn" class="border-0 bg-transparent">✖</button>
+  </div>
+  <p></p>
+  <div class="mb-3">
+    <label for="name" class="form-label">Full Name</label>
+    <input type="text" class="form-control" id="exampleInputname1" aria-describedby="emailHelp">
+    <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
+  </div>
+  <div class="mb-3">
+    <label for="exampleInputEmail1" class="form-label">Email</label>
+    <input type="email" class="form-control" id="exampleInputemail1">
+  </div>
+  <div class="mb-3">
+    <label for="number" class="form-label">Phone number</label>
+    <input type="tel" class="form-control" id="exampleInputnumber1">
+  </div>
+  <div class="mb-3">
+    <label for="number" class="form-label">Watsapp number</label>
+    <input type="tel" class="form-control" id="exampleInputnumber1">
+  </div>
+  <div class="mb-3 form-check">
+    <input type="checkbox" class="form-check-input" id="exampleCheck1">
+    <label class="form-check-label" for="exampleCheck1">Check me out</label>
+  </div>
+  <button type="submit" class="btn btn-primary">Submit</button>
+
+</form>
+
+
+
+
+
+<section class="hero pb-5" style="background: linear-gradient(to right, #e6eef5, #244a6f);">
+
+<div class="container mb-0">
+  <div class="row align-items-center">
+    <div class="col-lg-6 my-5" style="color: #244a6f; font-size: 4rem; font-weight: bold; font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;">
+      <p>Enjoye With Marina Fleet<p>
+      <h2>New Gallery...</h2>
+    </div>
+  
+    <div class="col-lg-6" data-aos="fade-right" data-aos-duration="2000">
+      <img src="luxury-yacht-majestic-white-vessel-open-waters.png" alt="" id="f-img">
+    </div>
+  </div>
+</div>
+
+<div class="man-box w-100 mt-0 align-items-center" style="background-color: #244a6f; color: #f5f7f9;">
+  <div class="move-text-box">
+    <div class="move-text">
+      Memorable Gallery New boats and Yacht Images welcome Marina Fleet</div>
+  </div>
+</div>
+</section>
+
+
+<h2 class=" mx-5 text-center my-5">Our Gallery</h2>
+
+  <section class="hero-section my-5 container">
+    
+  <div class="gallery">
+    <div class="gallery-item">
+      <img src="Numarine_yacht_for_charter_Dolce-vita_7218-FrbGkvub.jpg" alt="Luxury Boat">
+      <div class="caption">Dolce Vita yacht</div>
+    </div>
+    <div class="gallery-item">
+      <img src="charter-destiny-yacht.jpg" alt="Sailing Boat">
+      <div class="caption">Destiny yacht</div>
+    </div>
+    <div class="gallery-item">
+      <img src="8660brochure1.jpg" alt="Fishing Boat">
+      <div class="caption">Destiny yacht (another angel)</div>
+    </div>
+    <div class="gallery-item">
+      <img src="superyacht.png" alt="Fishing Boat">
+      <div class="caption">Super-Yacht</div>
+    </div>
+    <div class="gallery-item">
+      <img src="charter-escape-yacht-1.jpg" alt="Fishing Boat">
+      <div class="caption">Escape Yacht</div>
+    </div>
+    <div class="gallery-item">
+      <img src="charter-andiamo-yacht.jpg" alt="Fishing Boat">
+      <div class="caption">Andiamo Yacht</div>
+    </div>
+    <div class="gallery-item">
+      <img src="luxury-ship.jpg" alt="Fishing Boat">
+      <div class="caption">Luxury Yacht</div>
+    </div>
+    <div class="gallery-item">
+      <img src="Sailing-boat.jpg" alt="Fishing Boat">
+      <div class="caption">Sailing Yacht</div>
+    </div>
+    <div class="gallery-item">
+      <img src="Fishing-boat.jpg" alt="Fishing Boat">
+      <div class="caption">Fishing Boat</div>
+    </div>
+    <div class="gallery-item">
+      <img src="Serenity Fleet I.jpg" alt="Fishing Boat">
+      <div class="caption">Serenity Fleet I</div>
+    </div>
+    <div class="gallery-item">
+      <img src="Mediterranean Elegance.jpg" alt="Fishing Boat">
+      <div class="caption">Mediterranean Elegance</div>
+    </div>
+    <div class="gallery-item">
+      <img src="Benoa Marina Grand Fleet.jpg" alt="Fishing Boat">
+      <div class="caption">Benoa Marina Grand Fleet</div>
+    </div>
+  </div>
+
+  
+  <div class="popup" id="popup">
+    <span onclick="closePopup()">&times;</span>
+    <img id="popup-img" src="" alt="">
+  </div>
+
+
+
+
+  </section>
+
+  <section class="hero2-section">
+
+    
+
+
+
+  </section>
+
+<footer class="bg-dark text-light px-5 py-5">
+  <div class="container">
+    <div class="row">
+
+      
+      <div class="col-lg-4 mb-3">
+        <h5 class="fw-bold">
+          <span class="text-warning">Marina</span>-Fleet
+        </h5>
+        <p class="small">
+          Luxury yachts & boats for sale and charter. Sail beyond expectations with Marina Fleet.
+      </div>
+
+    
+      <div class="col-lg-4 mb-3">
+        <h6 class="fw-bold">USEFUL LINKS</h6>
+        <ul class="list-unstyled small">
+          <li><a href="#" class="text-light text-decoration-none">› Luxury Yacht</a></li>
+          <li><a href="#" class="text-light text-decoration-none">› Sailing-boat</a></li>
+          <li><a href="#" class="text-light text-decoration-none">› Fishing</a></li>
+          <li><a href="#" class="text-light text-decoration-none">› Site Map</a></li>
+          <li><a href="#" class="text-light text-decoration-none">› Feedback</a></li>
+        </ul>
+      </div>
+
+      
+      <div class="col-lg-4 mb-3">
+        <h6 class="fw-bold">CONTACT US</h6>
+        <p class="small mb-1">
+          APWA Complex, 1st Floor,<br>
+          Agha Khan 3 Rd, Garden East,<br>
+          Saddar Town, Karachi
+        </p>
+        <p class="small mb-1"><strong>Phone:</strong> +92 5589 55488 5</p>
+        <p class="small mb-2"><strong>Email:</strong> info@aptechgdn.net</p>
+        
+        <div>
+          <a href="#" class="icon-social"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAB5ElEQVR4AcSVSyh1URTHv09kIsqIIhSZkYEBmUnymiklj4EBE1EmRh5lopCEgQxESjFRHmXAjDJiQEzlMaEYiDzit27Wbd17974Xkdv/d9ba/73OWXefc+6+cf9++fPnDRJZYCPMwyHcwS0cwBw0QAJ4FW0FVZx1AovQDAWQDClQCK2wBMdQDk75GgxQvQHZEEu5FGxBD0TI1WCQqn74iuQ6I5zQBSGSCWvUMegDn66ZkFuTRfz/wShRNUZSBkHZBkm4M+DTCxNysjzwM3KX5HqzTAQfvBiMA2rimAY+LTNxCqoKErmVpUSrfAbVEJBtUBtw/IcjM1VPLg9WXoYS8nDVqGEbFKnpiffGzzC5Ky1W0zZIVfMHYvD1tg1eHRe+wtO3ZZxcJbn6O2qaGK+5bXCppolvJveleY6Jc/Vsg301TZRvaYYRqexVruexp5W2wZqaJqaTyyqEbnKV5OI9qhEWV3VsG6xg+n5ATH1askE6G8gvtePTl3EXyqra7JRdgfibHCbguxrixF0IKryBTMj9jbYnSY2LYcyIjdLVQJbZTnEL3EAsXVAg20wvMUKuBlq0QJIJnbANz6B6IpG9SL5IDvk6OBWtgZzwwGES5C9xiqiaJqkEuZW2MVaoYjUIrf7G6B0AAP//kB8rjAAAAAZJREFUAwDvQEcxpgJuOAAAAABJRU5ErkJggg=="/></a>
+          <a href="#" class="icon-social"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAACaElEQVR4AdyUW4hNURjHj7skSSHKPUqi3MqDSEIplEuRW0m5Rl4l8S4SwpPcXrwoFAkRCSVSYqZmmplmmmZep3mY5vr7zdl7zd5rzmnmYeZlTv/f+r71fWutb5+1116jC8P8G7kFFrFzd+APdEF3Gcw5xrGLGdNPpbboJKP+wSmYAs/gahleEZ8Kp+EvHIec4gJryN6G/+ATzcfuhytl2El8LiyHergHKyEoLnCRTAc4sQo7kA4zoBoewx4YBZcgKC6wiswHqIGsHLeNwAU4B1vAxZqwC2Aa/EpYjQ1yYujgOLAWm9UcOl/gDVyHm/AWPsEs2A6XQdXRTIeguMBkMi2Qyrwv2ac8RHAmzIajsAR8qRZ+iK/aaSZCkAuEDo5/23eA26u9tOvAbXmKbYZGeATnYT3sgFQeW9dI+4W4gIkxNgmeKt3XNhHvk/7axGoGVWC8IxP8wHRLPYhxyeYsYCyQTabBdFH7P2zAU4PJaWvS+55YjevlihgwkSW7h89JfINbcBBmgC/5CPYGfIaXkGosji8aU1RcoJXwJEjl0+yj48f0BOu5b8B6aiqwByD7j8fRb4OguIAnxHMfBuB4BWzA7oYHcB92wUawGCZoHp4nDVNUXMA930TKOwgT5D9xu44R8TJ8gc0+Od3CChpvAtfALSoucI3wBHCxhdjBysWd08kEv3ZMUXEB7xOv3mWkK+ErfEx4h/Wa8MbUT+M+8W9ybu1Z7E8IiguYcIGlOO61V4f7735vJuYXfQKrb8ycV8NdYs5xLm6fShUw61V9Bse/7hiPbinMOcaxzmFKXg7IR4a4N+wFegAAAP//2xkrQwAAAAZJREFUAwDvsHYx1ZsaWgAAAABJRU5ErkJggg=="/></a>
+       
+        </div>
+      </div>
+
+      
+
+    <hr class="border-light">
+    <div class="f-box text-center bg-dark px-3 py-3">
+<p class="text-light">© Thanks For Scrolling<br>
+<span class="text-warning">Marina Fleet</span></p>
+    </div>
+</footer>
+
+
+
+
+  <script>
+
+    const navLinks=document.querySelectorAll('.nav-links a');
+    function updateNavColor(){
+      if(window.scrollY<100){navLinks.forEach(a=>a.style.color='rgba(255,255,255,0.95)')}else{navLinks.forEach(a=>a.style.color='var(--deep-navy)')}
+    }
+    window.addEventListener('scroll',updateNavColor);
+    updateNavColor();
+
+    const items = document.querySelectorAll('.gallery-item img');
+    const popup = document.getElementById('popup');
+    const popupImg = document.getElementById('popup-img');
+
+    items.forEach(img => {
+      img.addEventListener('click', () => {
+        popup.style.display = 'flex';
+        popupImg.src = img.src;
+      });
+    });
+
+    function closePopup() {
+      popup.style.display = 'none';
+    }
+
+    $(document).ready(function(){
+
+      
+      $(`.btn`).click(function(){
+      $(`#contact-form`).show(`slow`)
+      })
+
+      $(`#cancel-btn`).click(function(){
+      $(`#contact-form`).hide(`slow`)
+      })
+
+    })
+
+  </script>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
+
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+<script>
+  AOS.init();
+</script>
+
+</body>
+</html>

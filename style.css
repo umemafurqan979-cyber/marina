@@ -1,0 +1,296 @@
+ :root {
+      --navy: #00aef0;
+      --deep-navy: #244a6f;
+      --gold: #f0c400;
+      --muted: #f5f7f9;
+      --text: #222;
+    }
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: "Segoe UI", sans-serif;
+      scroll-behavior: smooth;
+    }
+    /* Hero */
+    .hero {
+      min-height: 90vh;
+      display: flex;
+      align-items: center;
+      background: linear-gradient(to right, #e6eef5, #244a6f);
+      color: #244a6f;
+      padding: 50px 0;
+    }
+    .hero h1 {
+      font-size: 3.5rem;
+      font-weight: bold;
+    }
+    .hero img {
+      max-width: 100%;
+      border-radius: 12px;
+      animation: float 4s ease-in-out infinite;
+    }
+    @keyframes float {
+      0%, 100% { transform: translateY(0px); }
+      50% { transform: translateY(-15px); }
+    }
+    /* Cards */
+    .card:hover {
+      transform: translateY(-10px) scale(1.03);
+      transition: 0.4s;
+    }
+  /* Pricing Plan Highlight */
+.plan-card {
+  border: 2px solid #eee;
+  transition: all 0.4s ease;
+  border-radius: 15px;
+  padding-top: 20px;
+}
+.plan-card .plan-title {
+  font-size: 1.3rem;
+  font-weight: 600;
+  margin-bottom: 15px;
+}
+.plan-card .price {
+  font-size: 2rem;
+  font-weight: bold;
+  color: #0077b6;
+  margin: 15px 0;
+}
+.plan-card ul li {
+  margin: 8px 0;
+  font-size: 0.95rem;
+  color: #444;
+}
+
+/* Hover Effect (All Plans behave like Featured on Hover) */
+.plan-card:hover {
+  background: #e0f7fa;
+  border: 2px solid #00b4d8;
+  transform: scale(1.05);
+  box-shadow: 0 6px 20px rgba(0,0,0,0.15);
+}
+.plan-card:hover .plan-title {
+  color: #0077b6;
+}
+.plan-card:hover .price {
+  color: #023e8a;
+}
+.plan-card:hover .btn {
+  background: #00b4d8;
+  color: #fff;
+  border: none;
+}
+
+/* Featured Plan (Default Focused) */
+.featured {
+  background: #e0f7fa;
+  border: 2px solid #00b4d8;
+  transform: scale(1.05);
+  box-shadow: 0 6px 20px rgba(0,0,0,0.15);
+}
+.featured .plan-title {
+  color: #0077b6;
+}
+.featured .price {
+  color: #023e8a;
+}
+.featured .btn {
+  background: #00b4d8;
+  color: #fff;
+  border: none;
+}
+
+/* Badge */
+.badge-featured {
+  position: absolute;
+  top: -12px;
+  right: -12px;
+  background: #00b4d8;
+  color: #fff;
+  padding: 5px 12px;
+  font-size: 0.8rem;
+  font-weight: bold;
+  border-radius: 50px;
+  box-shadow: 0 3px 10px rgba(0,0,0,0.15);
+}
+
+/* Gallery Hover Effect */
+/* galler page styling  */
+.view {
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+  height: 250px;
+  border-radius: 12px;
+  box-shadow: 0 6px 15px rgba(0,0,0,0.1);
+}
+
+.yacht-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.4s ease;
+  display: block;
+}
+
+.mask {
+  position: absolute;
+  opacity: 0;
+  transition: all 0.5s ease;
+  z-index: 1;
+}
+
+/* Top Left Triangle */
+.triangle-top-left {
+  top: 0;
+  left: 0;
+  width: 0;
+  height: 0;
+  border-top: 250px solid rgba(255, 215, 0, 0.6);
+  border-right: 350px solid transparent;
+  transform: translate(-100%, -100%);
+}
+
+/* Bottom Right Triangle */
+.triangle-bottom-right {
+  bottom: 0;
+  right: 0;
+  width: 0;
+  height: 0;
+  border-bottom: 250px solid rgba(255, 215, 0, 0.6);
+  border-left: 350px solid transparent;
+  transform: translate(100%, 100%);
+}
+
+/* Sky blue rectangle */
+.sky-overlay {
+  top: 50%;
+  left: 50%;
+  width: 90%;
+  height: 80%;
+  background: rgba(135, 206, 250, 0.7);
+  transform: translate(-50%, -50%) scale(0.6);
+  border-radius: 12px;
+  padding: 20px;
+  box-sizing: border-box;
+
+  /* Flexbox for center */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+/* Overlay content */
+.overlay-content {
+  color: #fff;
+  opacity: 0;
+  transform: scale(0.8);
+  transition: all 0.4s ease;
+}
+
+.overlay-content h3 {
+  font-size: 1.3rem;
+  margin-bottom: 8px;
+  font-weight: bold;
+}
+.overlay-content p {
+  font-size: 0.9rem;
+  margin: 0;
+  word-wrap: break-word;
+}
+
+/* Hover Effects */
+.view:hover .triangle-top-left {
+  transform: translate(0, 0);
+  opacity: 1;
+}
+.view:hover .triangle-bottom-right {
+  transform: translate(0, 0);
+  opacity: 1;
+}
+.view:hover .sky-overlay {
+  opacity: 1;
+  transform: translate(-50%, -50%) scale(1);
+}
+.view:hover .overlay-content {
+  opacity: 1;
+  transform: scale(1);
+}
+.view:hover .yacht-img {
+  transform: scale(1.08);
+}
+
+    /* Destination Cards */
+.destination-card {
+  background: rgba(255, 255, 255, 0.9); /* light glass effect */
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+  transition: transform 0.5s ease, box-shadow 0.5s ease;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.destination-card:hover {
+  transform: translateY(-10px) scale(1.03);
+  box-shadow: 0 15px 30px rgba(0,0,0,0.25);
+}
+
+.destination-card .img-box {
+  overflow: hidden;
+}
+
+.destination-card img {
+  width: 100%;
+  height: 220px;
+  object-fit: cover;
+  transition: transform 0.6s ease;
+}
+
+.destination-card:hover img {
+  transform: scale(1.1);
+}
+
+.destination-card .card-body {
+  padding: 20px;
+}
+
+.destination-card h4 {
+  color: #222;
+  font-size: 1.3rem;
+  margin-bottom: 12px;
+}
+
+.destination-card p {
+  font-size: 0.95rem;
+  line-height: 1.5;
+}
+.footer-link {
+  color: #d1d1d1;
+  text-decoration: none;
+  transition: color 0.3s;
+}
+.footer-link:hover {
+  color: #ffcc00;
+}
+.social-icon {
+  font-size: 1.3rem;
+  color: #d1d1d1;
+  transition: color 0.3s, transform 0.3s;
+}
+.social-icon:hover {
+  color: #ffcc00;
+  transform: scale(1.2);
+}
+
+/*  contact Modal Animation */
+.modal-content {
+  animation: zoomIn 0.4s ease;
+}
+@keyframes zoomIn {
+  from {transform: scale(0.8); opacity: 0;}
+  to {transform: scale(1); opacity: 1;}
+}
