@@ -1,0 +1,656 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Marina Fleet</title>
+
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+  <style>
+    body{
+      padding: 0px;
+      margin: 0px;
+      box-sizing: border-box;
+    }
+    :root{
+      --navy:#00aef0;
+      --deep-navy:#0a2a44;
+      --gold:#f0c400;
+      --muted:#f5f7f9;
+      --accent:#00b7c2;
+      --text:#222;
+    }
+    
+.gallery {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 15px;
+    }
+
+    .gallery-item {
+      position: relative;
+      overflow: hidden;
+      cursor: pointer;
+      border-radius: 12px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+    }
+
+    .gallery-item img {
+      width: 100%;
+      height: 220px;
+      object-fit: cover;
+      transition: transform 0.4s ease;
+    }
+
+    .gallery-item:hover img {
+      transform: scale(1.1);
+    }
+
+    .gallery-item .caption {
+      position: absolute;
+      bottom: 0;
+      width: 100%;
+      text-align: center;
+      background: rgba(0,0,0,0.6);
+      color: #fff;
+      padding: 8px;
+      font-size: 18px;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+
+    .gallery-item:hover .caption {
+      opacity: 1;
+    }
+
+
+    .popup {
+      display: none;
+      position: fixed;
+      z-index: 1000;
+      left: 0; top: 0;
+      width: 100%; height: 100%;
+      background: rgba(0,0,0,0.8);
+      justify-content: center;
+      align-items: center;
+    }
+
+    .popup img {
+      max-width: 90%;
+      max-height: 80%;
+      border-radius: 12px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.5);
+    }
+
+    .popup span {
+      position: absolute;
+      top: 20px;
+      right: 40px;
+      font-size: 40px;
+      color: #fff;
+      cursor: pointer;
+      font-weight: bold;
+    }
+
+
+
+
+    footer{padding:40px 20px;}
+
+
+    @media (max-width:1000px){
+      .hero{min-height:460px}
+      .hero .container{flex-direction:column;gap:20px}
+      .hero-left{max-width:100%;text-align:center}
+      .hero h1{font-size:40px}
+      .hero-right{max-width:80%}
+      .dest-grid{grid-template-columns:repeat(2,1fr)}
+    }
+    @media (max-width:600px){
+      .hero{min-height:520px}
+      .dest-grid{grid-template-columns:1fr}
+      .hero h1{font-size:32px}
+    }
+    @media (max-width:832px){
+      .nav-links{display: none;}
+      
+    }
+    #f-img{
+      width: 100%;
+    }
+    .navbar-nav .nav-link{
+      color: #f5f7f9;
+    }
+    #contact-form{
+      display: none;
+    }
+    .move-text-box {
+      width: 100%;
+      overflow: hidden;
+      position: relative;
+      height: 100px;
+    }
+
+    .move-text {
+      position: absolute;
+      white-space: nowrap;
+      animation: moveText 10s linear infinite;
+      font-size: 1.2rem;
+      padding: 20px;
+    }
+    @keyframes moveText {
+      0% {
+        right: -100%;
+      }
+      100% {
+        right: 100%;
+      }
+    }
+    .navbar .navbar-nav .nav-item .nav-link{
+
+      color: white;
+    }
+    .navbar .navbar-nav .nav-item .nav-link:hover{
+      text-decoration: solid;
+      text-decoration-line: underline;
+      text-underline-offset: 0.3rem;
+      color: #244a6f;
+    }
+    #logo-icon{
+      width: 20vh;
+    
+    }
+
+
+
+
+
+
+
+
+
+
+
+    .slides {
+    padding: 0;
+    width: 609px;
+    height: 420px;
+    display: block;
+    margin: 0 auto;
+    position: relative;
+}
+
+.slides * {
+    user-select: none;
+    -ms-user-select: none;
+    -moz-user-select: none;
+    -khtml-user-select: none;
+    -webkit-user-select: none;
+    -webkit-touch-callout: none;
+}
+
+.slides input { display: none; }
+
+.slide-container { display: block; }
+
+.slide {
+    top: 0;
+    opacity: 0;
+    width: 609px;
+    height: 420px;
+    display: block;
+    position: absolute;
+
+    transform: scale(0);
+
+    transition: all .7s ease-in-out;
+}
+
+.slide img {
+    width: 100%;
+    height: 100%;
+}
+
+.nav label {
+    width: 200px;
+    height: 100%;
+    display: none;
+    position: absolute;
+
+	  opacity: 0;
+    z-index: 9;
+    cursor: pointer;
+
+    transition: opacity .2s;
+
+    color: #FFF;
+    font-size: 156pt;
+    text-align: center;
+    line-height: 380px;
+    font-family: "Varela Round", sans-serif;
+    background-color: rgba(255, 255, 255, .3);
+    text-shadow: 0px 0px 15px rgb(119, 119, 119);
+}
+
+.slide:hover + .nav label { opacity: 0.5; }
+
+.nav label:hover { opacity: 1; }
+
+.nav .next { right: 0; }
+
+input:checked + .slide-container  .slide {
+    opacity: 1;
+
+    transform: scale(1);
+
+    transition: opacity 1s ease-in-out;
+}
+
+input:checked + .slide-container .nav label { display: block; }
+
+.nav-dots {
+	width: 100%;
+	bottom: 9px;
+	height: 11px;
+	display: block;
+	position: absolute;
+	text-align: center;
+}
+
+.nav-dots .nav-dot {
+	top: -5px;
+	width: 11px;
+	height: 11px;
+	margin: 0 4px;
+	position: relative;
+	border-radius: 100%;
+	display: inline-block;
+	background-color: rgba(0, 0, 0, 0.6);
+}
+
+.nav-dots .nav-dot:hover {
+	cursor: pointer;
+	background-color: rgba(0, 0, 0, 0.8);
+}
+
+input#img-1:checked ~ .nav-dots label#img-dot-1,
+input#img-2:checked ~ .nav-dots label#img-dot-2,
+input#img-3:checked ~ .nav-dots label#img-dot-3,
+input#img-4:checked ~ .nav-dots label#img-dot-4,
+input#img-5:checked ~ .nav-dots label#img-dot-5,
+input#img-6:checked ~ .nav-dots label#img-dot-6 {
+	background: rgba(0, 0, 0, 0.8);
+}
+
+
+
+
+
+
+  </style>
+</head>
+<body>
+
+<nav class="navbar navbar-expand-lg" style="background: linear-gradient(to right, #e6eef5, #244a6f);">
+  <div class="container">
+    <div data-aos="fade-down"
+     data-aos-anchor-placement="bottom-center">
+
+    <img src="./assest/images/e_project_logo-removebg-preview (1).png" alt="" id="logo-icon">
+ </div>   
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav m-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="#">Home</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="gallery.html">Gallery</a>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Categories</a>
+          <ul class="dropdown-menu">
+            <li><a class="dropdown-item" href="Luxury.html">Luxury</a></li>
+            <li><a class="dropdown-item" href="#">Sailing</a></li>
+            <li><hr class="dropdown-divider"></li>
+            <li><a class="dropdown-item" href="#">Fishing</a></li>
+          </ul>
+        </li>
+       <li class="nav-item">
+          <a class="nav-link" href="#">About</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">Contact</a>
+        </li>
+      </ul>
+    
+      
+      <button class="btn rounded-5 bg-primary text-light" data-bs-toggle="modal" data-bs-target="#contactCard">
+        Contact Us
+      </button>
+      
+    </div>
+  </div>
+</nav>
+
+
+
+<section class="hero pb-5" style="background: linear-gradient(to right, #e6eef5, #244a6f);">
+
+<div class="container mb-0">
+  <div class="row align-items-center">
+    <div class="col-lg-6 my-5" style="color: #244a6f; font-size: 4rem; font-weight: bold; font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;">
+      <p>Enjoye With Marina Fleet<p>
+      <h2>Luxury Yachts...</h2>
+    </div>
+  
+    <div class="col-lg-6" data-aos="fade-right" data-aos-duration="20000">
+      <img src="./assest/images/luxury-yacht-majestic-white-vessel-open-waters.png" alt="" id="f-img">
+    </div>
+  </div>
+</div>
+</section>
+
+
+  
+  <div class="modal fade" id="contactCard" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content shadow-lg rounded-3">
+        <div class="modal-header">
+          <h5 class="modal-title">Contact Us</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+        </div>
+        <div class="modal-body">
+          <form>
+            <div class="mb-3">
+              <label class="form-label">Your Name</label>
+              <input type="text" class="form-control" placeholder="Enter name">
+            </div>
+            <div class="mb-3">
+              <label class="form-label">Email Address</label>
+              <input type="email" class="form-control" placeholder="Enter email">
+            </div>
+            <div class="mb-3">
+              <label class="form-label">Phone Number</label>
+              <input type="email" class="form-control" placeholder="Enter email">
+            </div>
+            <div class="mb-3">
+              <label class="form-label">Message</label>
+              <textarea class="form-control" rows="3" placeholder="Write your message..."></textarea>
+            </div>
+            <button type="submit" class="btn btn-success w-100">Send Message</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+<h2 class=" mx-5 text-center my-5">Our Luxury</h2>
+
+  <section class="hero-section my-5 container">
+
+  <div class="container my-5">
+    <div class="row row-cols-1 row-cols-md-3 row-cols-lg-3 g-4">
+      
+      <div class="col">
+        <div class="card shadow">
+          <img src="./assest/images/luxury-yacht-serenity-72-mediterranean-sea.jpeg" class="card-img-top" alt="Serenity">
+          <div class="card-body">
+            <h5 class="card-title">SERENITY</h5>
+            <p class="card-text">$675.00</p>
+            <p class="card-text">⭐️⭐️⭐️⭐️</p>
+          </div>
+        </div>
+      </div>
+
+      
+      <div class="col">
+        <div class="card shadow">
+          <img src="./assest/images/luxury-charter-yacht-carpe-diem-at-anchor_001.jpg" class="card-img-top" alt="Carpe Diem">
+          <div class="card-body">
+            <h5 class="card-title">CARPE DIEM</h5>
+            <p class="card-text">$475.00</p>
+            <p class="card-text">⭐️⭐️⭐️</p>
+          </div>
+        </div>
+      </div>
+
+      
+      <div class="col">
+        <div class="card shadow">
+          <img src="./assest/images/image,b,6477,121648,0,0.jpg" class="card-img-top" alt="My Way">
+          <div class="card-body">
+            <h5 class="card-title">MY WAY</h5>
+            <p class="card-text">$575.00</p>
+            <p class="card-text">⭐️⭐️⭐️⭐️</p>
+          </div>
+        </div>
+      </div>
+
+    
+      <div class="col">
+        <div class="card shadow">
+          <img src="./assest/images/ANDIAMO-Yacht-•-Benetti-•-2009-•-Owner-Sir-Michael-Hintze-81.jpg" class="card-img-top" alt="Andiamo">
+          <div class="card-body">
+            <h5 class="card-title">ANDIAMO</h5>
+            <p class="card-text">$800.00</p>
+            <p class="card-text">⭐️⭐️⭐️⭐️</p>
+          </div>
+        </div>
+      </div>
+
+    
+      <div class="col">
+        <div class="card shadow">
+          <img src="./assest/images/Broward_yacht_for_sale_Destiny_1568-0zv3eOD6.jpg" class="card-img-top" alt="Destiny">
+          <div class="card-body">
+            <h5 class="card-title">DESTINY</h5>
+            <p class="card-text">$500.00</p>
+            <p class="card-text">⭐️⭐️⭐️⭐️</p>
+          </div>
+        </div>
+      </div>
+
+    
+      <div class="col">
+        <div class="card shadow">
+          <img src="./assest/images/profile of Endless Summer by night.jpg" class="card-img-top" alt="Endless Summer">
+          <div class="card-body">
+            <h5 class="card-title">ENDLESS SUMMER</h5>
+            <p class="card-text">$650.00</p>
+            <p class="card-text">⭐️⭐️⭐️</p>
+          </div>
+        </div>
+      </div>
+
+      
+      <div class="col">
+        <div class="card shadow">
+          <img src="./assest/images/Yacht BLUE MOON by Feadship - Royal Van Lent Shipyard - Underway Mediterranean 2.jpg" class="card-img-top" alt="Serenity">
+          <div class="card-body">
+            <h5 class="card-title">BLUE MOON</h5>
+            <p class="card-text">$675.00</p>
+            <p class="card-text">⭐️⭐️⭐️⭐️</p>
+          </div>
+        </div>
+      </div>
+
+    
+      <div class="col">
+        <div class="card shadow">
+          <img src="./assest/images/8185brochure1.jpg" class="card-img-top" alt="Carpe Diem">
+          <div class="card-body">
+            <h5 class="card-title">AMURA</h5>
+            <p class="card-text">$475.00</p>
+            <p class="card-text">⭐️⭐️⭐️</p>
+          </div>
+        </div>
+      </div>
+
+      
+      <div class="col">
+        <div class="card shadow">
+          <img src="./assest/images/antisan-yacht-charter-cannes-29.jpg" class="card-img-top" alt="My Way">
+          <div class="card-body">
+            <h5 class="card-title">ANTISAN</h5>
+            <p class="card-text">$575.00</p>
+            <p class="card-text">⭐️⭐️⭐️⭐️</p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  </section>
+
+
+<h2 class=" mx-5 text-center my-5">Popular Products</h2>
+
+<section class="hero-2 my-5">
+
+<ul class="slides">
+    <input type="radio" name="radio-btn" id="img-1" checked />
+    <li class="slide-container">
+		<div class="slide">
+			<img src="./assest/images/Numarine_yacht_for_charter_Dolce-vita_7218-FrbGkvub.jpg" />
+        </div>
+		<div class="nav">
+			<label for="img-6" class="prev">&#x2039;</label>
+			<label for="img-2" class="next">&#x203a;</label>
+		</div>
+    </li>
+
+    <input type="radio" name="radio-btn" id="img-2" />
+    <li class="slide-container">
+        <div class="slide">
+          <img src="./assest/images/profile of Endless Summer by night.jpg" />
+        </div>
+		<div class="nav">
+			<label for="img-1" class="prev">&#x2039;</label>
+			<label for="img-3" class="next">&#x203a;</label>
+		</div>
+    </li>
+
+    <input type="radio" name="radio-btn" id="img-3" />
+    <li class="slide-container">
+        <div class="slide">
+          <img src="./assest/images/Yacht BLUE MOON by Feadship - Royal Van Lent Shipyard - Underway Mediterranean 2.jpg" />
+        </div>
+		<div class="nav">
+			<label for="img-2" class="prev">&#x2039;</label>
+			<label for="img-4" class="next">&#x203a;</label>
+		</div>
+    </li>
+
+    <input type="radio" name="radio-btn" id="img-4" />
+    <li class="slide-container">
+        <div class="slide">
+          <img src="./assest/images/Broward_yacht_for_sale_Destiny_1568-0zv3eOD6.jpg" />
+        </div>
+		<div class="nav">
+			<label for="img-3" class="prev">&#x2039;</label>
+			<label for="img-5" class="next">&#x203a;</label>
+		</div>
+    </li>
+
+    <input type="radio" name="radio-btn" id="img-5" />
+    <li class="slide-container">
+        <div class="slide">
+          <img src="./assest/images/luxury-ship.jpg" />
+        </div>
+		<div class="nav">
+			<label for="img-4" class="prev">&#x2039;</label>
+			<label for="img-6" class="next">&#x203a;</label>
+		</div>
+    </li>
+
+    <input type="radio" name="radio-btn" id="img-6" />
+    <li class="slide-container">
+        <div class="slide">
+          <img src="./assest/images/luxury-yacht-serenity-72-mediterranean-sea.jpeg" />
+        </div>
+		<div class="nav">
+			<label for="img-5" class="prev">&#x2039;</label>
+			<label for="img-1" class="next">&#x203a;</label>
+		</div>
+    </li>
+
+    <li class="nav-dots">
+      <label for="img-1" class="nav-dot" id="img-dot-1"></label>
+      <label for="img-2" class="nav-dot" id="img-dot-2"></label>
+      <label for="img-3" class="nav-dot" id="img-dot-3"></label>
+      <label for="img-4" class="nav-dot" id="img-dot-4"></label>
+      <label for="img-5" class="nav-dot" id="img-dot-5"></label>
+      <label for="img-6" class="nav-dot" id="img-dot-6"></label>
+    </li>
+</ul>
+
+
+</section>
+
+
+
+
+<footer class="bg-dark text-light px-5 py-5">
+  <div class="container">
+    <div class="row">
+
+      
+      <div class="col-lg-4 mb-3">
+        <h5 class="fw-bold">
+          <span class="text-warning">Marina</span> Fleet
+        </h5>
+        <p class="small">
+          Luxury yachts & boats for sale and charter. Sail beyond expectations with Marina Fleet.
+      </div>
+
+    
+      <div class="col-lg-4 mb-3">
+        <h6 class="fw-bold">USEFUL LINKS</h6>
+        <ul class="list-unstyled small">
+          <li><a href="#" class="text-light text-decoration-none">› Luxury Yacht</a></li>
+          <li><a href="#" class="text-light text-decoration-none">› Sailing-boat</a></li>
+          <li><a href="#" class="text-light text-decoration-none">› Fishing</a></li>
+          <li><a href="#" class="text-light text-decoration-none">› Site Map</a></li>
+          <li><a href="#" class="text-light text-decoration-none">› Feedback</a></li>
+        </ul>
+      </div>
+
+      
+      <div class="col-lg-4 mb-3">
+        <h6 class="fw-bold">CONTACT US</h6>
+        <p class="small mb-1">
+          APWA Complex, 1st Floor,<br>
+          Agha Khan 3 Rd, Garden East,<br>
+          Saddar Town, Karachi
+        </p>
+        <p class="small mb-1"><strong>Phone:</strong> +92 5589 55488 5</p>
+        <p class="small mb-2"><strong>Email:</strong> info@aptechgdn.net</p>
+        
+      </div>
+
+      
+
+    <hr class="border-light">
+    <div class="f-box text-center bg-dark px-3 py-3">
+<p class="text-light">© Thanks For Scrolling<br>
+<span class="text-warning">Marina Fleet</span></p>
+    </div>
+</footer>
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
+
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+<script>
+  AOS.init();
+</script>
+
+</body>
+</html>

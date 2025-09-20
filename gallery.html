@@ -126,20 +126,6 @@
     #contact-form{
       display: none;
     }
-    .move-text-box {
-      width: 100%;
-      overflow: hidden;
-      position: relative;
-      height: 100px;
-    }
-
-    .move-text {
-      position: absolute;
-      white-space: nowrap;
-      animation: moveText 10s linear infinite;
-      font-size: 1.2rem;
-      padding: 20px;
-    }
     @keyframes moveText {
       0% {
         right: -100%;
@@ -148,14 +134,34 @@
         right: 100%;
       }
     }
+    .navbar .navbar-nav .nav-item .nav-link{
+
+      color: white;
+    }
+    .navbar .navbar-nav .nav-item .nav-link:hover{
+      text-decoration: solid;
+      text-decoration-line: underline;
+      text-underline-offset: 0.3rem;
+      color: #244a6f;
+    }
+    .navbar img{
+
+      width: 20vh;
+
+    }
 
   </style>
 </head>
 <body>
 
-<nav class="navbar navbar-expand-lg py-3" style="background: linear-gradient(to right, #e6eef5, #244a6f);">
+<nav class="navbar navbar-expand-lg py-3 align-items-center" style="background: linear-gradient(to right, #e6eef5, #244a6f);">
   <div class="container">
-    <a class="navbar-brand" href="#">Logo</a>
+    <div data-aos="fade-down"
+     data-aos-anchor-placement="bottom-center">
+
+    <img src="./assest/images/e_project_logo-removebg-preview (1).png" alt="">
+   </div> 
+    
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
@@ -168,11 +174,9 @@
           <a class="nav-link" href="gallery.html">Gallery</a>
         </li>
         <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-          Categories 
-          </a>
+          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Categories</a>
           <ul class="dropdown-menu">
-            <li><a class="dropdown-item" href="#">Luxury</a></li>
+            <li><a class="dropdown-item" href="Luxury.html">Luxury</a></li>
             <li><a class="dropdown-item" href="#">Sailing</a></li>
             <li><hr class="dropdown-divider"></li>
             <li><a class="dropdown-item" href="#">Fishing</a></li>
@@ -186,43 +190,48 @@
         </li>
       </ul>
     
-        <button class="btn text-light rounded-5" type="submit" style="background-color: #244a6f;">Contact Us</button>
+      
+      <button class="btn rounded-5 bg-primary text-light" data-bs-toggle="modal" data-bs-target="#contactCard">
+        Contact Us
+      </button>
+    
       
     </div>
   </div>
 </nav>
 
 
-  <form class="pt-5 container pb-5" id="contact-form">
-  <div class="d-flex justify-content-between">
-  <h2>Contact Form</h2>
-  <button type="button" id="cancel-btn" class="border-0 bg-transparent">✖</button>
+<div class="modal fade" id="contactCard" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content shadow-lg rounded-3">
+        <div class="modal-header">
+          <h5 class="modal-title">Contact Us</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+        </div>
+        <div class="modal-body">
+          <form>
+            <div class="mb-3">
+              <label class="form-label">Your Name</label>
+              <input type="text" class="form-control" placeholder="Enter name">
+            </div>
+            <div class="mb-3">
+              <label class="form-label">Email Address</label>
+              <input type="email" class="form-control" placeholder="Enter email">
+            </div>
+            <div class="mb-3">
+              <label class="form-label">Phone Number</label>
+              <input type="email" class="form-control" placeholder="Enter email">
+            </div>
+            <div class="mb-3">
+              <label class="form-label">Message</label>
+              <textarea class="form-control" rows="3" placeholder="Write your message..."></textarea>
+            </div>
+            <button type="submit" class="btn btn-success w-100">Send Message</button>
+          </form>
+        </div>
+      </div>
+    </div>
   </div>
-  <p></p>
-  <div class="mb-3">
-    <label for="name" class="form-label">Full Name</label>
-    <input type="text" class="form-control" id="exampleInputname1" aria-describedby="emailHelp">
-    <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
-  </div>
-  <div class="mb-3">
-    <label for="exampleInputEmail1" class="form-label">Email</label>
-    <input type="email" class="form-control" id="exampleInputemail1">
-  </div>
-  <div class="mb-3">
-    <label for="number" class="form-label">Phone number</label>
-    <input type="tel" class="form-control" id="exampleInputnumber1">
-  </div>
-  <div class="mb-3">
-    <label for="number" class="form-label">Watsapp number</label>
-    <input type="tel" class="form-control" id="exampleInputnumber1">
-  </div>
-  <div class="mb-3 form-check">
-    <input type="checkbox" class="form-check-input" id="exampleCheck1">
-    <label class="form-check-label" for="exampleCheck1">Check me out</label>
-  </div>
-  <button type="submit" class="btn btn-primary">Submit</button>
-
-</form>
 
 
 
@@ -237,18 +246,13 @@
       <h2>New Gallery...</h2>
     </div>
   
-    <div class="col-lg-6" data-aos="fade-right" data-aos-duration="2000">
-      <img src="luxury-yacht-majestic-white-vessel-open-waters.png" alt="" id="f-img">
+    <div class="col-lg-6" data-aos="fade-right" data-aos-duration="20000">
+      <img src="./assest/images/luxury-yacht-majestic-white-vessel-open-waters.png" alt="" id="f-img">
     </div>
   </div>
 </div>
 
-<div class="man-box w-100 mt-0 align-items-center" style="background-color: #244a6f; color: #f5f7f9;">
-  <div class="move-text-box">
-    <div class="move-text">
-      Memorable Gallery New boats and Yacht Images welcome Marina Fleet</div>
-  </div>
-</div>
+
 </section>
 
 
@@ -258,51 +262,51 @@
     
   <div class="gallery">
     <div class="gallery-item">
-      <img src="Numarine_yacht_for_charter_Dolce-vita_7218-FrbGkvub.jpg" alt="Luxury Boat">
+      <img src="./assest/images/Numarine_yacht_for_charter_Dolce-vita_7218-FrbGkvub.jpg" alt="Luxury Boat">
       <div class="caption">Dolce Vita yacht</div>
     </div>
     <div class="gallery-item">
-      <img src="charter-destiny-yacht.jpg" alt="Sailing Boat">
+      <img src="./assest/images/charter-destiny-yacht.jpg" alt="Sailing Boat">
       <div class="caption">Destiny yacht</div>
     </div>
     <div class="gallery-item">
-      <img src="8660brochure1.jpg" alt="Fishing Boat">
+      <img src="./assest/images/8660brochure1.jpg" alt="Fishing Boat">
       <div class="caption">Destiny yacht (another angel)</div>
     </div>
     <div class="gallery-item">
-      <img src="superyacht.png" alt="Fishing Boat">
+      <img src="./assest/images/superyacht.png" alt="Fishing Boat">
       <div class="caption">Super-Yacht</div>
     </div>
     <div class="gallery-item">
-      <img src="charter-escape-yacht-1.jpg" alt="Fishing Boat">
+      <img src="./assest/images/charter-escape-yacht-1.jpg" alt="Fishing Boat">
       <div class="caption">Escape Yacht</div>
     </div>
     <div class="gallery-item">
-      <img src="charter-andiamo-yacht.jpg" alt="Fishing Boat">
+      <img src="./assest/images/charter-andiamo-yacht.jpg" alt="Fishing Boat">
       <div class="caption">Andiamo Yacht</div>
     </div>
     <div class="gallery-item">
-      <img src="luxury-ship.jpg" alt="Fishing Boat">
+      <img src="./assest/images/luxury-ship.jpg" alt="Fishing Boat">
       <div class="caption">Luxury Yacht</div>
     </div>
     <div class="gallery-item">
-      <img src="Sailing-boat.jpg" alt="Fishing Boat">
+      <img src="./assest/images/Sailing-boat.jpg" alt="Fishing Boat">
       <div class="caption">Sailing Yacht</div>
     </div>
     <div class="gallery-item">
-      <img src="Fishing-boat.jpg" alt="Fishing Boat">
+      <img src="./assest/images/Fishing-boat.jpg" alt="Fishing Boat">
       <div class="caption">Fishing Boat</div>
     </div>
     <div class="gallery-item">
-      <img src="Serenity Fleet I.jpg" alt="Fishing Boat">
+      <img src="./assest/images/Serenity Fleet I.jpg" alt="Fishing Boat">
       <div class="caption">Serenity Fleet I</div>
     </div>
     <div class="gallery-item">
-      <img src="Mediterranean Elegance.jpg" alt="Fishing Boat">
+      <img src="./assest/images/Mediterranean Elegance.jpg" alt="Fishing Boat">
       <div class="caption">Mediterranean Elegance</div>
     </div>
     <div class="gallery-item">
-      <img src="Benoa Marina Grand Fleet.jpg" alt="Fishing Boat">
+      <img src="./assest/images/Benoa Marina Grand Fleet.jpg" alt="Fishing Boat">
       <div class="caption">Benoa Marina Grand Fleet</div>
     </div>
   </div>
@@ -404,19 +408,6 @@
     function closePopup() {
       popup.style.display = 'none';
     }
-
-    $(document).ready(function(){
-
-      
-      $(`.btn`).click(function(){
-      $(`#contact-form`).show(`slow`)
-      })
-
-      $(`#cancel-btn`).click(function(){
-      $(`#contact-form`).hide(`slow`)
-      })
-
-    })
 
   </script>
 
