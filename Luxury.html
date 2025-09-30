@@ -10,7 +10,49 @@
   <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
 
+  <!-- GSAP CDN -->
+   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+   <!-- Swiper CSS -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+<!-- Swiper JS -->
+<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+
 </head>
+
+
+<style>
+  .swiper {
+    width: 100%;
+    padding-top: 50px;
+    padding-bottom: 50px;
+  }
+  .swiper-slide {
+    background: #fff;
+    width: 300px;
+    height: 350px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0px 4px 15px rgba(0,0,0,0.2);
+    transition: transform 0.5s ease, box-shadow 0.5s ease;
+  }
+  .swiper-slide img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.7s ease;
+  }
+  /* Hover effect */
+  .swiper-slide:hover img {
+    transform: scale(1.08);
+  }
+  .swiper-slide:hover {
+    box-shadow: 0px 8px 25px rgba(0,0,0,0.4);
+  }
+</style>
 <body>
 
 <!-- Navbar -->
@@ -25,7 +67,7 @@
     </button>
     <div class="collapse navbar-collapse" id="navMenu">
       <ul class="navbar-nav m-auto">
-        <li class="nav-item"><a class="nav-link active" href="#">Home</a></li>
+        <li class="nav-item"><a class="nav-link active" href="index.html">Home</a></li>
         <li class="nav-item"><a class="nav-link" href="#pricing">Pricing</a></li>
         <li class="nav-item"><a class="nav-link" href="#gallery">Gallery</a></li>
          <li class="nav-item dropdown">
@@ -95,7 +137,7 @@
 </nav>
 <!-- navbar end -->
 
-
+<!-- hero section -->
 <section class="hero pb-5" style="background: linear-gradient(to right, #e6eef5, #244a6f);">
 
 <div class="container mb-0">
@@ -144,7 +186,9 @@
     </div>
   </div>
 
+
 <h2 class=" mx-5 text-center my-5">Experience Timeless Luxury</h2>
+
 
   <section class="hero-section my-5 container">
 
@@ -267,7 +311,6 @@
 <!-- 🌟 Signature Collection Section -->
 <section class="popular-products py-5 bg-light">
   <div class="container">
-    <!-- Heading -->
     <h2 class="text-center mb-4 fw-bold text-uppercase" style="color:#244a6f;">
       Our Signature Collection
     </h2>
@@ -275,51 +318,25 @@
       Handpicked yachts designed for elegance, comfort & unforgettable journeys.
     </p>
 
-    <!-- Bootstrap Carousel -->
-    <div id="yachtCarousel" class="carousel slide" data-bs-ride="carousel">
-      <!-- Indicators -->
-      <div class="carousel-indicators">
-        <button type="button" data-bs-target="#yachtCarousel" data-bs-slide-to="0" class="active"></button>
-        <button type="button" data-bs-target="#yachtCarousel" data-bs-slide-to="1"></button>
-        <button type="button" data-bs-target="#yachtCarousel" data-bs-slide-to="2"></button>
-        <button type="button" data-bs-target="#yachtCarousel" data-bs-slide-to="3"></button>
-        <button type="button" data-bs-target="#yachtCarousel" data-bs-slide-to="4"></button>
-        <button type="button" data-bs-target="#yachtCarousel" data-bs-slide-to="5"></button>
+    <!-- Swiper -->
+    <div class="swiper mySwiper">
+      <div class="swiper-wrapper">
+        <div class="swiper-slide"><img src="assets/image/LUX 3.jpg" alt="Luxury Yacht 1"></div>
+        <div class="swiper-slide"><img src="assets/image/LUX4.jpg" alt="Luxury Yacht 2"></div>
+        <div class="swiper-slide"><img src="assets/image/POPULAR.jpg" alt="Luxury Yacht 3"></div>
+        <div class="swiper-slide"><img src="assets/image/LUX 5.jpg" alt="Luxury Yacht 4"></div>
+        <div class="swiper-slide"><img src="assets/image/LUX6.jpg" alt="Luxury Yacht 5"></div>
+        <div class="swiper-slide"><img src="assets/image/Fishing-boat.jpg" alt="Luxury Yacht 6"></div>
       </div>
-
-      <!-- Slides -->
-      <div class="carousel-inner shadow rounded-3">
-        <div class="carousel-item active">
-          <img src="assets/image/LUX 3.jpg" class="d-block w-100 rounded-3 fixed-slide" alt="Luxury Yacht 1">
-        </div>
-        <div class="carousel-item">
-          <img src="assets/image/LUX4.jpg" class="d-block w-100 rounded-3 fixed-slide" alt="Luxury Yacht 2">
-        </div>
-        <div class="carousel-item">
-          <img src="assets/image/POPULAR.jpg" class="d-block w-100 rounded-3 fixed-slide" alt="Luxury Yacht 3">
-        </div>
-        <div class="carousel-item">
-          <img src="assets/image/LUX 5.jpg" class="d-block w-100 rounded-3 fixed-slide" alt="Luxury Yacht 4">
-        </div>
-        <div class="carousel-item">
-          <img src="assets/image/LUX6.jpg" class="d-block w-100 rounded-3 fixed-slide" alt="Luxury Yacht 5">
-        </div>
-        <div class="carousel-item">
-          <img src="assets/image/Fishing-boat.jpg" class="d-block w-100 rounded-3 fixed-slide" alt="Luxury Yacht 6">
-        </div>
-      </div>
-
-      <!-- Controls -->
-      <button class="carousel-control-prev" type="button" data-bs-target="#yachtCarousel" data-bs-slide="prev">
-        <span class="carousel-control-prev-icon"></span>
-      </button>
-      <button class="carousel-control-next" type="button" data-bs-target="#yachtCarousel" data-bs-slide="next">
-        <span class="carousel-control-next-icon"></span>
-      </button>
+      <!-- Pagination & Navigation -->
+      <div class="swiper-pagination"></div>
+      <div class="swiper-button-next"></div>
+      <div class="swiper-button-prev"></div>
     </div>
   </div>
 </section>
-<!-- carousel section end -->
+<!-- swiiper section end -->
+
 
  <!-- 🌊 Footer -->
 <footer class="footer text-light pt-5" style="background: linear-gradient(to right, #244a6f, #0d1b2a);">
@@ -379,7 +396,8 @@
 </footer>
 
 
-
+ <!-- Swiper JS (must include before your script) -->
+<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
 
 <script>
   // Form Submit with Alert
@@ -397,6 +415,34 @@
     // Optionally clear form
     this.reset();
   });
+
+  var swiper = new Swiper(".mySwiper", {
+    effect: "coverflow", // options: "flip", "cube", "fade", "coverflow"
+    grabCursor: true,
+    centeredSlides: true,
+    slidesPerView: "auto",
+    coverflowEffect: {
+      rotate: 40,      // slide rotation angle
+      stretch: 0,      // spacing between slides
+      depth: 150,      // 3D depth
+      modifier: 1,     // effect multiplier
+      slideShadows: true,
+    },
+    loop: true,
+    autoplay: {
+      delay: 2500,     // auto slide delay
+      disableOnInteraction: false,
+    },
+    pagination: {
+      el: ".swiper-pagination",
+      clickable: true,
+    },
+    navigation: {
+      nextEl: ".swiper-button-next",
+      prevEl: ".swiper-button-prev",
+    },
+    speed: 800, // transition speed (ms)
+  });
 </script>
 
 <!-- Bootstrap Icons -->
@@ -409,6 +455,7 @@
 <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
 <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
 <script>
+    
   AOS.init();
 </script>
 <script>AOS.init();</script>
